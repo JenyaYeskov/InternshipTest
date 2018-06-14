@@ -33,6 +33,6 @@ public class Student {
 
     @Override
     public String toString() {
-        return "\n" + name + ": " + knowledge.getLevel();
+        return name + ": " + knowledge.getLevel();
     }
 }
