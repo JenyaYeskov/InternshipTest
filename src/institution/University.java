@@ -17,15 +17,6 @@ public class University {
         return universityStudents;
     }
 
-    public void setStudent(String name, String newName, int knowledge) {
-        for (Map.Entry<Integer, Student> st : universityStudents.entrySet()) {
-            if (Objects.equals(st.getValue().getName(), name)) {
-                universityStudents.get(st.getKey()).setName(newName);
-                universityStudents.get(st.getKey()).setKnowledge(new Knowledge(knowledge));
-            }
-        }
-    }
-
     public void addStudent(Student student) {
         if (!universityStudents.containsValue(student)) {
             int id = universityStudents.size();
@@ -36,11 +27,19 @@ public class University {
         }
     }
 
-    public void addStudent(Student student, int id) {
-        if (!universityStudents.containsValue(student))
-            universityStudents.put(id, student);
+
+    //Не знаю що саме мені потрібно було зрбити в цьому методі, адже для додавання студентів в університет
+    //вже є addStudent(), тому зробив метод що змінює вже існуючого студента за ім'ям.
+    public void setStudent(String name, String newName, int knowledge) {
+        for (Map.Entry<Integer, Student> student : universityStudents.entrySet()) {
+            if (Objects.equals(student.getValue().getName(), name)) {
+                universityStudents.get(student.getKey()).setName(newName);
+                universityStudents.get(student.getKey()).setKnowledge(new Knowledge(knowledge));
+            }
+        }
     }
 
+    //Метод повертає середнє арифметичне рівня знань всіх студентів що є в університеті
     public double getAverage() {
         List<Integer> vals = new ArrayList<>();
 
