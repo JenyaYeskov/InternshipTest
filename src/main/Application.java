@@ -6,7 +6,12 @@ import person.Student;
 
 public class Application {
     public static void main(String[] args) {
+
+        DBCredentials credentials = new DBCredentials("jdbc:mysql://localhost:3306/qweDB", "root", "root");
         University university = new University("CH.U.I.");
+
+        university.setStudentsFromDB(credentials);
+
         university.addStudent(new Student("Andrew Kostenko", 5));
         university.addStudent(new Student("Julia Veselkina", 8));
         university.addStudent(new Student("Maria Perechrest", 7));

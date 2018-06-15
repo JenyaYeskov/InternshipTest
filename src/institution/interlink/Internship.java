@@ -20,7 +20,9 @@ public class Internship {
             university.addStudent(student);
         }
 
-        if (student.getKnowledge().getLevel() > university.getAverage() && !internshipStudents.containsValue(student)) {
+        if (student.getKnowledge().getLevel() > university.getAverage()
+                && !internshipStudents.containsValue(student)) {
+
             for (Map.Entry<Integer, Student> studentEntry : university.getStudents().entrySet()) {
                 if (Objects.equals(studentEntry.getValue(), student))
                     internshipStudents.put(studentEntry.getKey(), student);
@@ -32,7 +34,8 @@ public class Internship {
         double avg = university.getAverage();
 
         for (Map.Entry<Integer, Student> student : university.getStudents().entrySet()) {
-            if (student.getValue().getKnowledge().getLevel() > avg && !this.internshipStudents.containsValue(student.getValue()))
+            if (student.getValue().getKnowledge().getLevel() > avg
+                    && !this.internshipStudents.containsValue(student.getValue()))
                 internshipStudents.put(student.getKey(), student.getValue());
         }
     }

@@ -1,8 +1,10 @@
 package institution;
 
+import main.DBCredentials;
 import person.Student;
 import person.consciousness.Knowledge;
 
+import java.sql.*;
 import java.util.*;
 
 public class University {
@@ -25,6 +27,11 @@ public class University {
             }
             universityStudents.put(id, student);
         }
+    }
+
+    public void addStudent(Student student, int id) {
+        if (!universityStudents.containsValue(student))
+            universityStudents.put(id, student);
     }
 
 
@@ -50,4 +57,20 @@ public class University {
         return Arrays.stream(vals.stream().mapToInt(i -> i).toArray()).average().orElse(Double.NaN);
     }
 
+
+    public void setStudentsFromDB(DBCredentials creds) {
+        try (Connection conn = DriverManager.getConnection(creds.getDbURL(), creds.getUsername(), creds.getPassword());
+             PreparedStatement statement = conn.prepareStatement("SELECT id, name, knowledge FROM students")) {
+
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                this.addStudent(new Student(result.getString("name"), result.getInt("knowledge")),
+                        result.getInt("id"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
