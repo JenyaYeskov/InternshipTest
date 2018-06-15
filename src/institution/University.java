@@ -46,6 +46,7 @@ public class University {
         }
     }
 
+    
     //Метод повертає середнє арифметичне рівня знань всіх студентів що є в університеті
     public double getAverage() {
         List<Integer> vals = new ArrayList<>();
